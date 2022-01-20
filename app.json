@@ -1,0 +1,17 @@
+{
+    "expo": {
+        "name": "IG Clone",
+        "icon": "./assets/app-logo.png",
+        "description": "This is an awesome app.",
+        "version": "1.0.0",
+        "slug": "ig-clone",
+        "ios": {
+            "bundleIdentifier": "com.hvs.igclone",
+            "buildNumber": "1.0.0"
+        },
+        "android": {
+            "package": "com.hvs.igclone",
+            "versionCode": 1
+        }
+    }
+}
