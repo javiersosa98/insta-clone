@@ -55,8 +55,8 @@ const Post = ({ post }) => {
                 <PostFooter post={post} handleLike={handleLike} />
                 <Likes post={post} />
                 <Caption post={post} />
-                <CommentsSection post={post} />
-                <Comments post={post} />
+                {/* <CommentsSection post={post} />
+                <Comments post={post} /> */}
             </View>
         </View>
     )
@@ -73,9 +73,9 @@ const PostHeader = ({ post }) => {
             }}
         >
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Image style={styles.story} />
+                <Image source={{ uri: post.profile_picture }} style={styles.story} />
                 <Text style={{ color: 'white', marginLeft: 5, fontWeight: '700' }}>
-
+                    {post.username}
                 </Text>
             </View>
 
@@ -90,7 +90,7 @@ const PostImage = ({ post }) => {
             width: '100%',
             height: 450,
         }}>
-            <Image 
+            <Image source={{ uri: post.imageUrl }}
                 style={{ height: '100%', resizeMode: 'cover' }}
             />
         </View>
@@ -111,7 +111,7 @@ const PostFooter = ({ handleLike, post }) => {
                         }}
                     />
                 </TouchableOpacity>
-                <Icon imgStyle={styles.footerIcon} imgUrl={postFooterIcons[1].imageUrl} />
+                <Icon imgStyle={[styles.footerIcon, { marginRight: 6 }]} imgUrl={postFooterIcons[1].imageUrl} />
                 <Icon imgStyle={[styles.footerIcon, styles.shareIcon]} imgUrl={postFooterIcons[2].imageUrl} />
             </View>
 
@@ -144,31 +144,31 @@ const Caption = ({ post }) => {
     return (
         <View style={{ marginTop: 5 }}>
             <Text style={{ color: 'white' }}>
-                <Text style={{ fontWeight: '600' }}>{}</Text>
-                <Text> {}</Text>
+                <Text style={{ fontWeight: '600' }}>{post.username}</Text>
+                <Text> {post.caption}</Text>
             </Text>
         </View>
     )
 }
 
-const CommentsSection = ({ post }) => {
-    return (
-        <View style={{ marginTop: 5 }}>
-            <Text style={{ color: 'gray' }}>
-                View {} {} {} 
-            </Text>
-        </View>
+// const CommentsSection = ({ post }) => {
+//     return (
+//         <View style={{ marginTop: 5 }}>
+//             <Text style={{ color: 'gray' }}>
+//                 View {} {} {} 
+//             </Text>
+//         </View>
         
-    )
-}
+//     )
+// }
 
-const Comments = ({ post }) => {
-    return (
-        <>
+// const Comments = ({ post }) => {
+//     return (
+//         <>
             
-        </>
-    )
-}
+//         </>
+//     )
+// }
 
 const styles = StyleSheet.create({
     story: {

@@ -4,7 +4,7 @@ import BottomTabs, { bottomTabIcons } from '../components/home/BottomTabs'
 import Header from '../components/home/Header'
 import Post from '../components/home/Post'
 import Stories from '../components/home/Stories'
-import { db } from '../firebase'
+import firebase, { db } from '../firebase'
 
 const HomeScreen = ({ navigation }) => {
     const [posts, setPosts] = useState([])

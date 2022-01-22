@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import { Divider } from 'react-native-elements'
+import firebase, { db } from '../../firebase'
 
 export const bottomTabIcons = [
     {
@@ -28,16 +29,30 @@ export const bottomTabIcons = [
     },
     {
         name: 'Profile',
-        active:
-        'https://yt3.ggpht.com/ytc/AKedOLRY9Un_v7Xr9dG1F5NEkqGsGSqwqRz0O3w3r1mI=s900-c-k-c0x00ffffff-no-rj',
-        inactive:
-        'https://yt3.ggpht.com/ytc/AKedOLRY9Un_v7Xr9dG1F5NEkqGsGSqwqRz0O3w3r1mI=s900-c-k-c0x00ffffff-no-rj',
+        active: null,
+        inactive: null,
     },
 ]
 
 const BottomTabs = ({ icons }) => {
     const [activeTab, setActiveTab] = useState('Home')
 
+    useEffect(() => {
+
+        const user = firebase.auth().currentUser
+        db.collection('users')
+        .where('owner_uid', '==', user.uid).limit(1).onSnapshot(
+            snapshot => {
+                    snapshot.docs.map(doc => {
+                        icons[4].active = doc.data().profile_picture
+                        icons[4].inactive = doc.data().profile_picture
+                    })
+            },
+            error => console.log("error caused by singOut (not important) ->", error.message)
+        )
+        
+    }, [])
+    
     const Icon = ({ icon }) => {
         return (
             <TouchableOpacity onPress={() => setActiveTab(icon.name)}>
